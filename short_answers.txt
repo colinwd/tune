@@ -1,0 +1,50 @@
+1. What does O(n) mean? O(n^2)?
+    Big O notation is a way of describing the worst-case of a function or
+program's execution. It can be used to refer to either computation time or
+computation space.
+    O(n) means that the execution time/space grows linearly with the size of
+the input, and is often referred to as "linear time". Searching through an
+unsorted list for an item would take O(n) time.
+    O(n^2), or quadratic time, is much slower than linear time. For a given
+input size, the computation time or space grows `n` times faster. Many sorting
+algorithms have a worst case of O(n^2).
+
+
+2. Describe the quicksort algorithm.
+    Quicksort is a divide-and-conquer sorting algorithm. First, we select an
+element in our list to be the pivot. There are different ways of selecting a
+pivot which can have impact on the runtime performance of the algorithm, but
+the implementation remains unchanged.
+    The next step is partitioning. All values less than or equal to our pivot
+are moved left of the pivot, and all values greater than or equal to our pivot
+are moved right of the pivot.
+    Once this step is complete, quicksort is called recursively on the sublists
+to the left and right of the pivot. As those return, the sorted lists are
+concatenated, and our final result is the fully sorted input.
+    
+
+3. In C, what is a pointer?
+    A pointer is the memory address of a piece of data. Rather than passing
+around the data itself, which can result in expensive copying, we can pass a
+pointer to the address of that data in memory. 
+
+
+4. What is the difference between Stack and Heap memory?
+    The stack is memory set aside for an executing thread, and is managed in a
+last-in first-out order. This makes memory access and management quick and
+simple, as all you need to do is increment or decrement a pointer.
+    The heap is memory used for dynamic allocation, and has no particular
+structure to it. In a language like C with manual memory management, heap
+access is managed with `malloc` and `free`, while in a manage language like
+Java, heap management is taken care of by the garbage collector.
+    Most typically, each thread is allocated stack memory by the OS at creation
+time, while heap memory is allocated at application start time and reclaimed
+when the process exits.
+
+
+5. What is the purpose of a garbage collector?
+    Garbage collection is one method of automatic memory management. As objects
+drop out of scope and are no longer needed by your program, they are marked as
+"garbage". The garbage collector will then eventually sweep through and clear
+out the marked objects. This garbage collection algorithm is known as
+"mark-and-sweep" and is the default implementation in Java.
