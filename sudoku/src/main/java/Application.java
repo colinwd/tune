@@ -4,15 +4,23 @@ import board.BoardParser;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Application {
 
     public static void main(String[] args) {
-        //read stdin
-        String boardPath = getInput();
-        List<String> rows = readBoard(boardPath);
+        List<String> rows;
+
+        if (args.length == 1) {
+            //read file from command line arg
+            String path = args[0];
+            rows = readBoard(path);
+        } else {
+            //read stdin
+            rows = getInput();
+        }
 
         //parse to board
         Board board = new BoardParser().parse(rows);
@@ -27,8 +35,15 @@ public class Application {
         }
     }
 
-    protected static String getInput() {
-        return new Scanner(System.in).nextLine();
+    protected static List<String> getInput() {
+        List<String> result = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        while (scanner.hasNext()) {
+            result.add(scanner.next());
+        }
+
+        return result;
     }
 
     protected static List<String> readBoard(String path) {

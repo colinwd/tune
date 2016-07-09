@@ -43,7 +43,7 @@ public class Solver {
     }
 
     /**
-     * Check a cell's neighbors (row, column, and box-mates) to see if we would be creating a duplicate
+     * Check a cell's neighbors (row, column, and box-mates) to see if we would be making an illegal move
      * @param cell
      * @param board
      * @return

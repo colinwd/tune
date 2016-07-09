@@ -47,10 +47,6 @@ public class Board {
         board.get(cell.getCoordinates().getY()).set(cell.getCoordinates().getX(), cell);
     }
 
-    public List<Cell> getCells() {
-        return board.stream().flatMap(Collection::stream).collect(Collectors.toList());
-    }
-
     public List<Cell> getRow(int y) {
         return board.get(y);
     }

@@ -8,7 +8,6 @@ import java.util.*;
 public class Cell {
 
     private Integer value;
-    private List<Integer> candidates = new ArrayList<>();
     private Coordinates coordinates;
 
     public Cell(Coordinates coordinates, int value) {
@@ -24,11 +23,6 @@ public class Cell {
     }
 
     public Cell() {
-        if (this.value == null) {
-            for (int i = 1; i <= 9; i++) {
-                candidates.add(i);
-            }
-        }
     }
 
     public Optional<Integer> getValue() {
