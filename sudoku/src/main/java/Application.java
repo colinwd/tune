@@ -11,27 +11,36 @@ import java.util.Scanner;
 public class Application {
 
     public static void main(String[] args) {
-        List<String> rows;
+        try {
+            List<String> rows;
 
-        if (args.length == 1) {
-            //read file from command line arg
-            String path = args[0];
-            rows = readBoard(path);
-        } else {
-            //read stdin
-            rows = getInput();
-        }
+            if (args.length == 1) {
+                //read file from command line arg
+                String path = args[0];
+                rows = readBoard(path);
+            } else {
+                //read stdin
+                rows = getInput();
+            }
 
-        //parse to board
-        Board board = new BoardParser().parse(rows);
+            if (rows.size() < 9) {
+                System.err.println("Invalid board format - less than 9 rows.");
+                System.exit(1);
+            }
 
-        //solve the puzzle
-        boolean solved = new Solver().solve(board);
+            //parse to board
+            Board board = new BoardParser().parse(rows);
 
-        if (solved) {
-            System.out.println(board.toString());
-        } else {
-            System.out.println("Couldn't find a solution! Oh no!");
+            //solve the puzzle
+            boolean solved = new Solver().solve(board);
+
+            if (solved) {
+                System.out.println(board.toString());
+            } else {
+                System.err.println("Couldn't find a solution! Oh no!");
+            }
+        } catch (Exception e) {
+            System.err.println("Error occurred: " + e.getMessage());
         }
     }
 
@@ -55,7 +64,7 @@ public class Application {
         try {
             rows = Files.readAllLines(Paths.get(path));
         } catch (IOException e) {
-            System.out.println("Unable to find file at path: " + path);
+            System.err.println("Unable to find file at path: " + path);
         }
         return rows;
     }

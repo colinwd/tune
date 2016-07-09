@@ -9,4 +9,15 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Sudoku Solver',
+            'Implmentation-Version': '1.0',
+            'Main-Class': 'Application'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
 mainClassName = "Application"

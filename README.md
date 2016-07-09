@@ -2,6 +2,30 @@
 
 This is a Java sudoku solver utilizing depth-first search to find puzzle solutions.
 
+## Project Setup ##
+
+### Dependencies ###
+
+Java 8
+
+### Compilation ###
+
+```
+cd sudoku/
+./gradlew make
+```
+
+### Execution ###
+
+The program can read on STDIN like so:
+```
+java -jar solve.jar < /path/to/sudoku/board
+```
+or take a file path as an argument:
+```
+java -jar solve.jar /path/to/sudoku/board
+```
+
 ## The Algorithm ##
 
 The primary method for the solution search is a recursive depth-first search through the game state. From the initial board state, we loop over each empty cell in the board and try each possible candidate. As each attempt is made, we propagate those changes to the potential candidates of the other cells in the board, and recurse. If we reach an illegal board state, we back up and move to the next possible candidate.
