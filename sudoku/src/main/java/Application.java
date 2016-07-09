@@ -1,3 +1,6 @@
+import board.Board;
+import board.BoardParser;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,9 +18,13 @@ public class Application {
         Board board = new BoardParser().parse(rows);
 
         //solve the puzzle
-        Board solved = new Solver(board).solve();
+        boolean solved = new Solver().solve(board);
 
-        System.out.println(solved.toString());
+        if (solved) {
+            System.out.println(board.toString());
+        } else {
+            System.out.println("Couldn't find a solution! Oh no!");
+        }
     }
 
     protected static String getInput() {

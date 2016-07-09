@@ -1,3 +1,5 @@
+package board;
+
 public class BadBoardException extends RuntimeException {
     public BadBoardException() {
         super();

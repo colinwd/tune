@@ -1,3 +1,4 @@
+package cell;
 
 import java.util.*;
 
@@ -67,7 +68,7 @@ public class Cell {
 
     @Override
     public String toString() {
-        return "[Cell: " + value + "]";
+        return "[cell.Cell: " + value + "]";
     }
 
     @Override

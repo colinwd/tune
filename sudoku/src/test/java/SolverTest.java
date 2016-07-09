@@ -1,3 +1,4 @@
+import board.Board;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,9 +9,9 @@ public class SolverTest {
         Board board = TestUtils.readBoard("easy-test-board.txt");
         Board solution = TestUtils.readBoard("easy-test-board-solved.txt");
 
-        Board solved = new Solver(board).solve();
+        new Solver().solve(board);
 
-        Assert.assertEquals(solution.toString(), solved.toString());
+        Assert.assertEquals(solution.toString(), board.toString());
     }
 
     @Test
@@ -18,8 +19,8 @@ public class SolverTest {
         Board board = TestUtils.readBoard("hard-test-board.txt");
         Board solution = TestUtils.readBoard("hard-test-board-solved.txt");
 
-        Board solved = new Solver(board).solve();
+        new Solver().solve(board);
 
-        Assert.assertEquals(solution.toString(), solved.toString());
+        Assert.assertEquals(solution.toString(), board.toString());
     }
 }

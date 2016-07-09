@@ -1,9 +1,14 @@
+package board;
+
+import cell.Cell;
+import cell.Coordinates;
+
 import java.util.List;
 
 public class BoardParser {
     public Board parse(List<String> rows) {
         if (rows.size() != 9) {
-            throw new IllegalArgumentException("Board input does not have 9 rows - invalid board.");
+            throw new IllegalArgumentException("board.Board input does not have 9 rows - invalid board.");
         }
 
         Board result = new Board();
@@ -18,7 +23,7 @@ public class BoardParser {
             for (int cell = 0; cell < 9; cell++) {
                 try {
                     int i = Integer.parseInt(cellValues[cell]);
-                    result.setCell(new Coordinates(cell, row), i);
+                    result.setCell(new Cell(new Coordinates(cell, row), i));
                 } catch (NumberFormatException e) {
                     //Non-integer means we don't need to set the cell, so do nothing
                 }

@@ -1,3 +1,5 @@
+import board.Board;
+import board.BoardParser;
 import org.junit.Assert;
 
 import java.net.URI;

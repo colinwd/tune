@@ -1,3 +1,5 @@
+import board.Board;
+import cell.Coordinates;
 import org.junit.Assert;
 import org.junit.Test;
 

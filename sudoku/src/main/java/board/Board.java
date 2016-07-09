@@ -1,3 +1,8 @@
+package board;
+
+import cell.Cell;
+import cell.Coordinates;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,6 +15,7 @@ public class Board {
 
     private List<List<Cell>> board;
     private boolean isSolved = false;
+    private boolean failed = false;
 
     public Board() {
         this.board = new ArrayList<>(9);
@@ -31,9 +37,10 @@ public class Board {
             for (int j = 0; j < 9; j++) {
                 Coordinates c = new Coordinates(j, i);
                 if (this.getCell(c).getValue().isPresent()) {
-                    board.setCell(c, this.getCell(c).getValue().get());
+                    Cell cell = this.getCell(c);
+                    board.setCell(new Cell(c, cell.getValue().get()));
                 } else {
-                    board.setCell(c, new Cell(c));
+                    board.setCell(new Cell(c));
                 }
             }
         }
@@ -52,13 +59,12 @@ public class Board {
     }
 
     /**
-     * Set a cell via zero-indexed coordinates.
+     * Set a cell on the board.
      *
-     * @param c     the cell coordinates
-     * @param value the value to set in the {@link Cell}
+     * @param cell     the cell to set
      */
-    public void setCell(Coordinates c, int value) {
-        board.get(c.getY()).set(c.getX(), new Cell(c, value));
+    public void setCell(Cell cell) {
+        board.get(cell.getCoordinates().getY()).set(cell.getCoordinates().getX(), cell);
     }
 
     public List<Cell> getCells() {
@@ -115,9 +121,15 @@ public class Board {
         return isSolved;
     }
 
-    private void setCell(Coordinates c, Cell cell) {
-        board.get(c.getY()).set(c.getX(), cell);
+    public boolean isFailed() {
+        return failed;
     }
+
+    public void setFailed(boolean failed) {
+        this.failed = failed;
+    }
+
+
 
     @Override
     public String toString() {

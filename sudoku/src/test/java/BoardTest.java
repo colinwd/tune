@@ -1,3 +1,6 @@
+import board.Board;
+import cell.Cell;
+import cell.Coordinates;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +12,7 @@ public class BoardTest {
     public void getAndSetCell() {
         Board board = new Board();
         Integer value = 3;
-        board.setCell(new Coordinates(1, 4), value);
+        board.setCell(new Cell(new Coordinates(1, 4), value));
 
         System.out.println(board);
 
@@ -48,6 +51,6 @@ public class BoardTest {
     public void badCoordinates() {
         Board board = new Board();
         Integer value = 3;
-        board.setCell(new Coordinates(10, 10), value);
+        board.setCell(new Cell(new Coordinates(10, 10), value));
     }
 }
