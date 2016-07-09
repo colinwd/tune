@@ -7,7 +7,7 @@ import java.util.*;
 public class Cell {
 
     private Integer value;
-    private Set<Integer> candidates = new HashSet<>();
+    private List<Integer> candidates = new ArrayList<>();
     private Coordinates coordinates;
 
     public Cell(Coordinates coordinates, int value) {
@@ -40,15 +40,19 @@ public class Cell {
 
     public void setValue(Integer value) {
         this.value = value;
-        candidates = new HashSet<>(); //No other candidates possible if we have a value!
+        candidates = new ArrayList<>(); //No other candidates possible if we have a value!
     }
 
-    public Collection<Integer> getCandidates() {
-        return candidates;
+    public List<Integer> getCandidates() {
+        if (value != null) {
+            return new ArrayList<>();
+        } else {
+            return candidates;
+        }
     }
 
-    public void removeCandidate(int candidate) {
-        candidates.remove(candidate);
+    public void emptyCandidates() {
+        candidates = new ArrayList<>();
     }
 
     public Coordinates getCoordinates() {

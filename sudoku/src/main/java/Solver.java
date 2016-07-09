@@ -1,46 +1,64 @@
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class Solver {
 
-    private final Board board;
-    private boolean boardChanged;
+    private Board board;
 
     public Solver(Board board) {
         this.board = board;
     }
 
     public Board solve() {
-        while (!board.isSolved()) {
-            boardChanged = false;
+        Stack<Board> stack = new Stack<>();
+        stack.push(board);
 
-            System.out.println(board);
+        int candidate = 0;
+        while (!stack.isEmpty()) {
+            if (stack.peek().isSolved()) {
+                return stack.pop();
+            }
 
-            reduceCandidates();
-
-            setSolvedCells();
-
-            if (!boardChanged) {
-                return board;
+            try {
+                Board next = iterate(stack.peek(), candidate);
+                stack.push(next);
+                candidate++;
+            } catch (BadBoardException e) {
+                stack.pop();
+                candidate = 0;
             }
         }
 
-        return board;
+        throw new RuntimeException("wtf");
     }
 
-    private void setSolvedCells() {
-        for (Cell cell : board.getCells()) {
-            if (!cell.getValue().isPresent()) {
-                if (cell.getCandidates().size() == 1) {
-                    cell.setValue(cell.getCandidates().iterator().next());
-                    boardChanged = true;
-                }
+    private Board iterate(Board board, int candidate) {
+        Board result = board.copy();
+
+        result = reduceCandidates(result);
+
+        //get cell with fewest candidates remaining over 1
+        Optional<Cell> cell = result.getCells().stream()
+                .filter(c -> c.getCandidates().size() > 1)
+                .sorted((c1, c2) -> Integer.compare(c1.getCandidates().size(), c2.getCandidates().size())).findFirst();
+
+        cell.ifPresent(c -> {
+            if (c.getCandidates().size() > candidate) {
+                c.setValue(c.getCandidates().get(candidate));
+                c.emptyCandidates();
             }
-        }
+        });
+
+        System.out.println(result);
+
+        return result;
     }
 
-    private void reduceCandidates() {
-        for (Cell cell : board.getCells()) {
+    private Board reduceCandidates(Board board) {
+        for (Cell cell : board.getCells().stream().filter(c -> !c.getValue().isPresent()).collect(Collectors.toList())) {
             Coordinates coordinates = cell.getCoordinates();
 
             List<Cell> cellRow = board.getRow(coordinates.getY());
@@ -58,7 +76,18 @@ public class Solver {
                     iterator.remove();
                 }
             }
+
+            if (cell.getCandidates().size() == 0) {
+                throw new BadBoardException("Got stuck!");
+            }
+
+            if (cell.getCandidates().size() == 1) {
+                cell.setValue(cell.getCandidates().get(0));
+                cell.emptyCandidates();
+            }
         }
+
+        return board;
     }
 
     private boolean candidateIsIn(int candidate, List<Cell> cells) {

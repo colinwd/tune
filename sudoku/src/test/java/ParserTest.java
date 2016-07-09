@@ -7,7 +7,7 @@ public class ParserTest {
 
     @Test
     public void parseTest() throws URISyntaxException {
-        Board board = TestUtils.readBoard("test-board.txt");
+        Board board = TestUtils.readBoard("easy-test-board.txt");
 
         Assert.assertNotNull(board);
         System.out.println(board);

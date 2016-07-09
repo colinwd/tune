@@ -19,7 +19,7 @@ public class BoardTest {
 
     @Test
     public void getBox() {
-        Board board = TestUtils.readBoard("test-board-solved.txt");
+        Board board = TestUtils.readBoard("easy-test-board-solved.txt");
         List<Cell> cells = board.getBox(new Coordinates(4, 4));
 
         Assert.assertEquals(cells.get(0).getValue().get(), (Integer) 5);
@@ -28,7 +28,7 @@ public class BoardTest {
 
     @Test
     public void getRow() {
-        Board board = TestUtils.readBoard("test-board-solved.txt");
+        Board board = TestUtils.readBoard("easy-test-board-solved.txt");
         List<Cell> cells = board.getRow(4);
 
         Assert.assertEquals(cells.get(0).getValue().get(), (Integer) 9);
@@ -37,7 +37,7 @@ public class BoardTest {
 
     @Test
     public void getColumn() {
-        Board board = TestUtils.readBoard("test-board-solved.txt");
+        Board board = TestUtils.readBoard("easy-test-board-solved.txt");
         List<Cell> cells = board.getColumn(4);
 
         Assert.assertEquals(cells.get(0).getValue().get(), (Integer) 4);

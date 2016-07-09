@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -15,9 +14,10 @@ public class Application {
         //parse to board
         Board board = new BoardParser().parse(rows);
 
-        //find moves
-        //update board
-        //repeat
+        //solve the puzzle
+        Board solved = new Solver(board).solve();
+
+        System.out.println(solved.toString());
     }
 
     protected static String getInput() {

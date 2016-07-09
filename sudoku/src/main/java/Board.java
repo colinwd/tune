@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -12,7 +14,6 @@ public class Board {
     public Board() {
         this.board = new ArrayList<>(9);
 
-        //Have to manually init because Java
         //All cells start empty but initialized
         for (int i = 0; i < 9; i++) {
             List<Cell> row = new ArrayList<>(9);
@@ -23,8 +24,26 @@ public class Board {
         }
     }
 
+    public Board copy() {
+        Board board = new Board();
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                Coordinates c = new Coordinates(j, i);
+                if (this.getCell(c).getValue().isPresent()) {
+                    board.setCell(c, this.getCell(c).getValue().get());
+                } else {
+                    board.setCell(c, new Cell(c));
+                }
+            }
+        }
+
+        return board;
+    }
+
     /**
      * Get a cell via zero-indexed coordinates.
+     *
      * @param c the cell coordinates
      * @return the matching {@link Cell}
      */
@@ -34,7 +53,8 @@ public class Board {
 
     /**
      * Set a cell via zero-indexed coordinates.
-     * @param c the cell coordinates
+     *
+     * @param c     the cell coordinates
      * @param value the value to set in the {@link Cell}
      */
     public void setCell(Coordinates c, int value) {
@@ -50,12 +70,7 @@ public class Board {
     }
 
     public List<Cell> getColumn(int x) {
-        List<Cell> result = new ArrayList<>();
-        for (List<Cell> rows : board) {
-            result.add(rows.get(x));
-        }
-
-        return result;
+        return board.stream().map(rows -> rows.get(x)).collect(Collectors.toList());
     }
 
     public List<Cell> getBox(Coordinates coordinates) {
@@ -69,9 +84,9 @@ public class Board {
         int yMax = yMin + 2;
 
         List<Cell> results = new ArrayList<>();
-        for (int i = xMin; i <= xMax; i++) {
+        for (int i = yMin; i <= yMax; i++) {
             List<Cell> row = board.get(i);
-            for (int j = yMin; j <= yMax; j++) {
+            for (int j = xMin; j <= xMax; j++) {
                 results.add(row.get(j));
             }
         }
@@ -81,6 +96,7 @@ public class Board {
 
     /**
      * Check if the board is solved
+     *
      * @return true if every cell has a value set, otherwise false
      */
     public boolean isSolved() {
@@ -99,24 +115,27 @@ public class Board {
         return isSolved;
     }
 
+    private void setCell(Coordinates c, Cell cell) {
+        board.get(c.getY()).set(c.getX(), cell);
+    }
+
     @Override
     public String toString() {
-        StringBuilder bb = new StringBuilder("---------------------\n");
+        StringBuilder bb = new StringBuilder();
 
         for (List<Cell> row : board) {
-            StringBuilder rb = new StringBuilder("| ");
+            StringBuilder rb = new StringBuilder();
 
             for (Cell cell : row) {
-                rb.append(cell.getValue().map(Object::toString).orElse("_"));
-                rb.append(" ");
+                rb.append(cell.getValue().map(Object::toString).orElse("-"));
+                rb.append(",");
             }
 
-            rb.append("|\n");
+            rb.deleteCharAt(rb.lastIndexOf(","));
 
             bb.append(rb);
+            bb.append("\n");
         }
-
-        bb.append("---------------------");
 
         return bb.toString();
     }
