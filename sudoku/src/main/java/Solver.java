@@ -4,6 +4,7 @@ import java.util.List;
 public class Solver {
 
     private final Board board;
+    private boolean boardChanged;
 
     public Solver(Board board) {
         this.board = board;
@@ -11,11 +12,17 @@ public class Solver {
 
     public Board solve() {
         while (!board.isSolved()) {
+            boardChanged = false;
+
             System.out.println(board);
+
+            reduceCandidates();
 
             setSolvedCells();
 
-            reduceCandidates();
+            if (!boardChanged) {
+                return board;
+            }
         }
 
         return board;
@@ -26,6 +33,7 @@ public class Solver {
             if (!cell.getValue().isPresent()) {
                 if (cell.getCandidates().size() == 1) {
                     cell.setValue(cell.getCandidates().iterator().next());
+                    boardChanged = true;
                 }
             }
         }
