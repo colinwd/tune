@@ -44,8 +44,8 @@ public class Solver {
 
     /**
      * Check a cell's neighbors (row, column, and box-mates) to see if we would be making an illegal move
-     * @param cell
-     * @param board
+     * @param cell The cell whose neighbors will be checked
+     * @param board The board containing the cell and its neighbors
      * @return
      */
     private boolean canPlace(Cell cell, Board board) {
@@ -55,10 +55,6 @@ public class Solver {
         List<Cell> cellColumn = board.getColumn(coordinates.getX());
         List<Cell> cellBox = board.getBox(coordinates);
 
-        if (cellRow.contains(cell) || cellColumn.contains(cell) || cellBox.contains(cell)) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(cellRow.contains(cell) || cellColumn.contains(cell) || cellBox.contains(cell));
     }
 }
