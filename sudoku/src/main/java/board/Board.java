@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 public class Board {
 
     private List<List<Cell>> board;
-    private boolean isSolved = false;
-    private boolean failed = false;
 
     public Board() {
         this.board = new ArrayList<>(9);
@@ -28,24 +26,6 @@ public class Board {
                 row.add(new Cell(new Coordinates(j, i)));
             }
         }
-    }
-
-    public Board copy() {
-        Board board = new Board();
-
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                Coordinates c = new Coordinates(j, i);
-                if (this.getCell(c).getValue().isPresent()) {
-                    Cell cell = this.getCell(c);
-                    board.setCell(new Cell(c, cell.getValue().get()));
-                } else {
-                    board.setCell(new Cell(c));
-                }
-            }
-        }
-
-        return board;
     }
 
     /**
@@ -99,37 +79,6 @@ public class Board {
 
         return results;
     }
-
-    /**
-     * Check if the board is solved
-     *
-     * @return true if every cell has a value set, otherwise false
-     */
-    public boolean isSolved() {
-        //memoize if solved to short-circuit this board traversal
-        if (isSolved) {
-            return isSolved;
-        } else {
-            for (Cell cell : getCells()) {
-                if (!cell.getValue().isPresent()) {
-                    return false;
-                }
-            }
-        }
-
-        isSolved = true;
-        return isSolved;
-    }
-
-    public boolean isFailed() {
-        return failed;
-    }
-
-    public void setFailed(boolean failed) {
-        this.failed = failed;
-    }
-
-
 
     @Override
     public String toString() {

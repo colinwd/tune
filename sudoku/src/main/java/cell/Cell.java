@@ -39,23 +39,6 @@ public class Cell {
         }
     }
 
-    public void setValue(Integer value) {
-        this.value = value;
-        candidates = new ArrayList<>(); //No other candidates possible if we have a value!
-    }
-
-    public List<Integer> getCandidates() {
-        if (value != null) {
-            return new ArrayList<>();
-        } else {
-            return candidates;
-        }
-    }
-
-    public void emptyCandidates() {
-        candidates = new ArrayList<>();
-    }
-
     public Coordinates getCoordinates() {
         return coordinates;
     }
