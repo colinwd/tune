@@ -1,4 +1,5 @@
-import java.util.Optional;
+
+import java.util.*;
 
 /**
  * An individual cell on a Sudoku board.
@@ -6,14 +7,27 @@ import java.util.Optional;
 public class Cell {
 
     private Integer value;
+    private Set<Integer> candidates = new HashSet<>();
+    private Coordinates coordinates;
 
-    public Cell(int value) {
+    public Cell(Coordinates coordinates, int value) {
+        this(coordinates);
         checkValue(value);
 
         this.value = value;
     }
 
+    public Cell(Coordinates coordinates) {
+        this();
+        this.coordinates = coordinates;
+    }
+
     public Cell() {
+        if (this.value == null) {
+            for (int i = 1; i <= 9; i++) {
+                candidates.add(i);
+            }
+        }
     }
 
     public Optional<Integer> getValue() {
@@ -22,6 +36,23 @@ public class Cell {
         } else {
             return Optional.of(value);
         }
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+        candidates = new HashSet<>(); //No other candidates possible if we have a value!
+    }
+
+    public Collection<Integer> getCandidates() {
+        return candidates;
+    }
+
+    public void removeCandidate(int candidate) {
+        candidates.remove(candidate);
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
     private void checkValue(int value) {
@@ -33,5 +64,21 @@ public class Cell {
     @Override
     public String toString() {
         return "[Cell: " + value + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cell cell = (Cell) o;
+
+        return !(value != null ? !value.equals(cell.value) : cell.value != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return value != null ? value.hashCode() : 0;
     }
 }
