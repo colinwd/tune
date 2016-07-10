@@ -6,6 +6,12 @@ import cell.Coordinates;
 import java.util.List;
 
 public class BoardParser {
+
+    /**
+     * Parse a list of strings of comma-separate values into a {@link Board} representation
+     * @param rows The strings to parse
+     * @return The {@link Board} representation
+     */
     public Board parse(List<String> rows) {
         if (rows.size() != 9) {
             throw new IllegalArgumentException("board.Board input does not have 9 rows - invalid board.");

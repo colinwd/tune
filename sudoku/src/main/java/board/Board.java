@@ -46,14 +46,29 @@ public class Board {
         board.get(cell.getCoordinates().getY()).set(cell.getCoordinates().getX(), cell);
     }
 
+    /**
+     * Get a row in the board
+     * @param y The y-value index of the row (0 through 8)
+     * @return A list of the row's {@link Cell}s
+     */
     public List<Cell> getRow(int y) {
         return board.get(y);
     }
 
+    /**
+     * Get a column in the board
+     * @param x the x-value index of the column (0 through 8)
+     * @return A list of the column's {@link Cell}s
+     */
     public List<Cell> getColumn(int x) {
         return board.stream().map(rows -> rows.get(x)).collect(Collectors.toList());
     }
 
+    /**
+     * Get the parent box (3x3 division) for a given cell
+     * @param coordinates The coordinates of the member cell
+     * @return A list of the box's {@link Cell}s
+     */
     public List<Cell> getBox(Coordinates coordinates) {
         int x = coordinates.getX();
         int y = coordinates.getY();

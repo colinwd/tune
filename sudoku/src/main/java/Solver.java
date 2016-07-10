@@ -6,11 +6,16 @@ import java.util.List;
 
 public class Solver {
 
+    /**
+     * Attempt to solve the supplied board by mutating the board in place.
+     * @param board The board to solve
+     * @return true if solved, or else false
+     */
     public boolean solve(Board board) {
         return solve(board, 0, 0);
     }
 
-    public boolean solve(Board board, int x, int y) {
+    private boolean solve(Board board, int x, int y) {
         if (x == 9) {
             x = 0; //end of row, reset
             if (y == 8) {
@@ -47,7 +52,7 @@ public class Solver {
      *
      * @param cell  The cell whose neighbors will be checked
      * @param board The board containing the cell and its neighbors
-     * @return
+     * @return true if move is legal, false if illegal
      */
     private boolean canPlace(Cell cell, Board board) {
         Coordinates coordinates = cell.getCoordinates();

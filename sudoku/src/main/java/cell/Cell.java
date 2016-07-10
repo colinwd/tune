@@ -12,17 +12,16 @@ public class Cell {
 
     public Cell(Coordinates coordinates, int value) {
         this(coordinates);
-        checkValue(value);
+
+        if (value < 1 || value > 9) {
+            throw new IllegalArgumentException("Value must be between 1 and 9.");
+        }
 
         this.value = value;
     }
 
     public Cell(Coordinates coordinates) {
-        this();
         this.coordinates = coordinates;
-    }
-
-    public Cell() {
     }
 
     public Optional<Integer> getValue() {
@@ -35,12 +34,6 @@ public class Cell {
 
     public Coordinates getCoordinates() {
         return coordinates;
-    }
-
-    private void checkValue(int value) {
-        if (value < 1 || value > 9) {
-            throw new IllegalArgumentException("Value must be between 1 and 9.");
-        }
     }
 
     @Override

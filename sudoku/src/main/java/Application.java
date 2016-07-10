@@ -28,10 +28,8 @@ public class Application {
                 System.exit(1);
             }
 
-            //parse to board
             Board board = new BoardParser().parse(rows);
 
-            //solve the puzzle
             boolean solved = new Solver().solve(board);
 
             if (solved) {
