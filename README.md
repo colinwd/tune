@@ -41,7 +41,7 @@ Since this is a naive depth-first search, time complexity is O(n) where n is the
 
 For my initial attempt at a solution, I tried to have my program solve the puzzle as a human would. While this could be a useful approach if the goal of the program is to demonstrate solution strategies, it proved to be overly complex to model, and I scrapped it. Once I realized the game states could be modeled as a tree, depth-first search felt like a natural choice.
 
-Once again, I attempted a more complex solution first: iterative depth-first search. However, the extra bookkeeping associated with an iterative approach proved cumbersome as well, and a recursive solution emerged.
+Once again, I attempted a more complex solution first: iterative depth-first search. However, the extra bookkeeping associated with an iterative approach proved cumbersome as well, and a recursive solution emerged that was much cleaner.
 
 Outside of the `Solver` class, the other code is fairly trivial. `Board` holds our collection of cells and their current state, as well as provides a few methods for introspection of board state. `Cell` and `Coordinates` are used in conjuction to model board spaces, and `BoardParser` - you guessed it - parses boards from input.
 
