@@ -4,3 +4,6 @@ out/
 
 sudoku/.gradle
 sudoku/build
+
+factorial/.gradle
+factorial/build

@@ -1,10 +1,9 @@
-package factorial;
-
 import java.math.BigInteger;
 
 class Factorial {
     /**
      * Basic iterative implementation. Slows down quite a bit when operand gets larger.
+     * BigInteger provides us arbitrary precision with no overflows.
      */
     static class Iterative {
         BigInteger factorial(int operand) {
@@ -25,7 +24,7 @@ class Factorial {
     }
 
     /**
-     * Recursive implementation. Slower than iterative and may run into StackOverflowExceptions!
+     * Recursive implementation. May run into StackOverflowExceptions!
      */
     static class Recursive {
         BigInteger factorial(int operand) {
@@ -41,7 +40,7 @@ class Factorial {
 
     /**
      * Stirling's approximation :) Much, much faster if you don't need an exact answer!
-     * However, quite inaccurate at lower values of operand
+     * However, quite inaccurate at lower values of operand, and double will eventually overflow to Infinity
      */
     static class Stirling {
         double factorial(int operand) {
