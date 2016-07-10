@@ -1,6 +1,6 @@
 package cell;
 
-import java.util.*;
+import java.util.Optional;
 
 /**
  * An individual cell on a Sudoku board.

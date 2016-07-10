@@ -4,7 +4,6 @@ import cell.Cell;
 import cell.Coordinates;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +40,7 @@ public class Board {
     /**
      * Set a cell on the board.
      *
-     * @param cell     the cell to set
+     * @param cell the cell to set
      */
     public void setCell(Cell cell) {
         board.get(cell.getCoordinates().getY()).set(cell.getCoordinates().getX(), cell);

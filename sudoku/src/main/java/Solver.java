@@ -44,7 +44,8 @@ public class Solver {
 
     /**
      * Check a cell's neighbors (row, column, and box-mates) to see if we would be making an illegal move
-     * @param cell The cell whose neighbors will be checked
+     *
+     * @param cell  The cell whose neighbors will be checked
      * @param board The board containing the cell and its neighbors
      * @return
      */
