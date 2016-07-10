@@ -21,10 +21,13 @@ The program can read on STDIN like so:
 ```
 java -jar solve.jar < /path/to/sudoku/board
 ```
+
 or take a file path as an argument:
 ```
 java -jar solve.jar /path/to/sudoku/board
 ```
+
+I've also provided a small shell script wrapper to fulfill the required `./solve` interface.
 
 ## The Algorithm ##
 

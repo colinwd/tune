@@ -20,4 +20,12 @@ task fatJar(type: Jar) {
     with jar
 }
 
+task make(dependsOn: fatJar) {
+    copy {
+        from 'build/libs/sudoku-all.jar'
+        into '.'
+        rename ('sudoku-all.jar', 'solve.jar')
+    }
+}
+
 mainClassName = "Application"
