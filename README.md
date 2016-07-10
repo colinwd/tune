@@ -35,7 +35,7 @@ The primary method for the solution search is a recursive depth-first search thr
 
 ## Complexity ##
 
-Since this is a naive depth-first search, time complexity is O(n) where n is the number of nodes in our graph (every possible move in the sudoku board). Best case would be O(1), where the first move we attempt is the correct solution. On average, it should be somewhere between those two, but I'm not sure about a precise complexity (perhaps log n?)
+Since this is a naive depth-first search, time complexity is O(n) where n is the number of nodes in our graph (every possible move in the sudoku board). Best case would be O(1), where the first move we attempt is the correct solution. On average, it should be somewhere between those two, but I'm not sure about a precise average complexity (perhaps log n?)
 
 ## Design ##
 
@@ -43,7 +43,7 @@ For my initial attempt at a solution, I tried to have my program solve the puzzl
 
 Once again, I attempted a more complex solution first: iterative depth-first search. However, the extra bookkeeping associated with an iterative approach proved cumbersome as well, and a recursive solution emerged.
 
-Outside of the `Solver` class, the other code is fairly trivial. `Board` holds our collection of cells and their current state, as well as provides a few methods for introspection of board state.
+Outside of the `Solver` class, the other code is fairly trivial. `Board` holds our collection of cells and their current state, as well as provides a few methods for introspection of board state. `Cell` and `Coordinates` are used in conjuction to model board spaces, and `BoardParser` - you guessed it - parses boards from input.
 
 ## Other Considerations ##
 
