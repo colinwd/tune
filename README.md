@@ -12,7 +12,7 @@ Java 8
 
 ```
 cd sudoku/
-./gradlew make
+./gradlew clean build make
 ```
 
 ### Execution ###
